@@ -350,7 +350,7 @@ class jackPerc(Graph):
 		self.file_sources_circle(sourceN,data.path,self.sourceT)
 		wait_time = self.source_time*sourceN+2
 		jackFile = "jackcpu.txt"
-		endcmd = ["killall", "jconvolver"]
+		endcmd = ["killall", "jmatconvol"]
 		jackcmd = "timeout --kill-after=1 "+str(self.run_time)+" jack_cpu_load >> "+jackFile
 		
 		cmd = ["tascar",data.path+"tempsources.tsc"]
