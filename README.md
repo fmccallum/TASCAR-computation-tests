@@ -30,7 +30,7 @@ If running jackpercentage test, need jack running
 Then need to run command
 
 ````
-python3 computationstests.py test.xml
+python3 computationtests.py test.xml
 ````
 
 ## Data
@@ -76,7 +76,7 @@ Within \<graphs\> tags, different tests are placed, either renderFile or jackPer
 
 ## renderFile
 
-The renderFile tests runs a "tascar_renderfile" test on the scene, which renders the audio quicker than real-time, and measures how long it takes to execute. The result therefore depends on the length of the scene which should be kept consistent. 
+The renderFile tests uses a "sources.tsc" file in the data folder and generates a new scene with a number of sources added. A "tascar_renderfile" command is then used, which renders the audio quicker than real-time, to measures how long the scene takes to render. The result therefore depends on the length of the scene which should be kept consistent. 
 
 ### renderFile options
 
@@ -89,7 +89,7 @@ The renderFile tests runs a "tascar_renderfile" test on the scene, which renders
 
 ## jackPercentage
 
-jackPercentage runs the scene in real-time and measures the jack usage using a "jack_cpu_load" command. This command outputs the cpu load every second. It was found that for some scenes the CPU load would not decrease when the TASCAR scene was closed, seemingly because jconvolver was still using resources. The script therefore uses a "killall jconvolver" command, which won't work with other convolution tools. Also, when a plugin is too computationally demanding the load goes from 100% to something much lower. This isn't captured by these scripts so might give odd results.
+The jackPercentage tests uses a "sources.tsc" file in the data folder and generates a new scene with a number of sources added. The test then runs the scene in real-time and measures the jack usage using a "jack_cpu_load" command. This command outputs the cpu load every second. It was found that for some scenes the CPU load would not decrease when the TASCAR scene was closed, seemingly because jconvolver was still using resources. The script therefore uses a "killall jmatconvol" command, which won't work with other convolution tools. Also, when a plugin is too computationally demanding the load goes from 100% to something much lower. This isn't captured by these scripts so might give odd results.
 
 ### jackPercentage options
 
