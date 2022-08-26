@@ -1,0 +1,21 @@
+<testfile>
+
+
+
+
+	<data>
+
+		<tscene path="example/nspkscene/" label="nspk" data_option="collate" />
+		
+		<tscene path="example/vbapscene/" label="vbap" data_option="collate" />
+		
+	</data>
+
+
+	<graphs>
+		<renderFile sources="10 100 200" repeats="2" samples="5" ref="True" bars="std" plot="savefile"/>
+		<jackPercentage sources="10 100 200" repeats="2" ref="True" run_time="15" bars="std" plot="savefile"/>
+	</graphs>
+
+
+</testfile>

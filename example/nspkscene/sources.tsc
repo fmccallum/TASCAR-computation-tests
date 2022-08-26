@@ -1,0 +1,7 @@
+<session name="demo" license="CC BY-SA 3.0" attribution="Freddie McCallum" playonload="true" loop="true" duration="5">
+	<scene name="main" guiscale="6">
+	<receiver name="out" type="nsp" layout="speakers16.xml"><position>0 0 0 0</position><orientation importcsv="stepped_rotation.csv" /></receiver>
+	
+	</scene>
+	
+</session>

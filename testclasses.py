@@ -10,6 +10,7 @@ import datetime
 import pickle
 import statistics
 import matplotlib.pyplot as plt
+import csv
 
 import xml.etree.cElementTree as cET
 import xml.etree.ElementTree as ET
@@ -140,8 +141,12 @@ class Graph:
 	repeats = 1
 	plot_type = "mean"
 	ref = False
-	#option for saving metric data to file!! So it can be plotted separately
-	#option for varying number of repeats based on length of test
+	fName="data"
+	header = []
+	
+
+	#option for varying number of repeats based on length of test?
+	
 	def __init__(self,attrib):
 		for key in attrib:
 			if key=="save_file":
@@ -253,13 +258,38 @@ class Graph:
 					plt.ylabel(self.name)
 					plt.title('All reference results for '+self.name+' '+d.label+ ' test '+ str(a))
 					plt.show()
-
+	
+	def savefile(self,data_arr):
+		labels=[]
+		fileName = self.fName +'.csv'
+		with open(fileName,'w',encoding='UTF8',newline='') as f:
+			writer = csv.writer(f)
+			writer.writerow(self.header)
+			for d in data_arr:
+				x_axis,results = d.load_data(self.path)
+				for count,a in enumerate(x_axis):
+					for i in range(len(results[count])):
+						data = [a,d.label,results[count][i]]
+						writer.writerow(data)
+					
+				if self.ref == True:
+					if d.reference is None:
+						continue
+					
+					xref,refresults = d.reference.load_data(self.path)
+					for count,a in enumerate(x_axis):
+						for i in range(len(refresults[count])):
+							data = [a,d.label+' reference',refresults[count][i]]
+							writer.writerow(data)
+					
 					
 	def plot(self,data_arr):
 		if self.plot_type.lower() == "mean":
 			self.plotmean(data_arr)
 		elif self.plot_type.lower() == "all":
 			self.plotall(data_arr)
+		elif self.plot_type.lower() == "savefile":
+			self.savefile(data_arr)
 					
 		
 	def file_sources_circle(self,N,path,sourceT = "pink",fileName="sources.tsc"):
@@ -297,6 +327,8 @@ class renderFile(Graph):
 	sourceT="pink"
 	samples = 1
 	xlabel= 'sources'
+	fName="renderFiledata"
+	header = ['sources', 'plugin', 'render time']
 	ylabel=name
 	def __init__(self,attrib):
 		super().__init__(attrib)
@@ -331,6 +363,8 @@ class jackPerc(Graph):
 	gui=False
 	xlabel= 'sources'
 	ylabel=name
+	fName="jackPercdata"
+	header = ['sources','plugin', 'jack percentage'] 
 	
 	def __init__(self,attrib):
 		super().__init__(attrib)
