@@ -27,10 +27,10 @@ An XML file for two different graphs each with two data sources looks like this:
 
 Need an XML file which details the TASCAR scenes/data to use and the graphs to be plotted
 If running jackpercentage test, need jack running
-Then need to run command
+To run the example tests need to run command
 
 ````
-python3 computationtests.py test.xml
+python3 computationtests.py example/example.xml
 ````
 
 ## Data
@@ -66,9 +66,9 @@ Within \<graphs\> tags, different tests are placed, either renderFile or jackPer
 
 "sources" is the number of sources that are placed in a scene. This is a string containing numbers seperated by a space. All the data for each scene is plotted regardless of whether it is in this string, but these numbers are used to decide the data to be generated. 
 
-"plot" is either "mean" or "all". "all" plots all the data for generated for the test as a line graph.
+"plot" is either "mean","all" or "savefile". "all" plots all the data for generated for the test as a line graph. "savefile" saves all the data into a csv file in the same directory as the computationstest.py file.
 
-"repeats" is the number of repeats of each test when generating data.
+"repeats" is the number of repeats of each test when generating data. Repeats only work when using the "collate" data option.
 
 "ref" is the reference and decides whether to use the reference when plotting the data. For plotting the mean, the reference mean is subtracted at each source. When plotting all the data, the reference data is also plotted. The reference data is also generated for each source number based on the data options.
 
